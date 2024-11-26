@@ -1,0 +1,14 @@
+<div class="container-wrapper">
+  <img src="./assets/images/logo-star-wars.png" alt="Logo Star Wars" class="logo">
+  <div class="d-flex justify-content-center align-items-center gap-15">
+    <div class="container">
+      <h2>Olá!</h2>
+      <h5 class="mb-4">Para começar seu teste, digite um e-mail:</h5>
+      <input [(ngModel)]="email" placeholder="E-mail" class="form-control mb-4"
+        [ngClass]="{'is-invalid': emailError}" />
+      <div *ngIf="emailError" class="error text-danger mb-3">E-mail inválido!</div>
+      <button class="btn btn-primary w-100" [disabled]="!isEmailValid()"
+        (click)="goToSearchPage()"><strong>Próximo</strong></button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,88 @@
+<div class="d-flex justify-content-center align-items-center vh-100 gap-15">
+  <div class="container">
+    <div *ngIf="loading" class="loading">
+      <img src="./assets/images/icone-storm-trooper.png" alt="Ícone Storm Trooper" class="loading-image"
+        [ngClass]="{ 'pop-animation': loading }">
+      <h5>Carregando...</h5>
+      <i class="fa fa-spinner fa-spin"></i>
+    </div>
+
+    <div *ngIf="!loading && character">
+      <h2 class="mb-4">Informações sobre {{ character.name }}:</h2>
+
+      <div class="mb-2">
+        <h5>Filmes:</h5>
+        <p *ngFor="let film of (character.filmNames && character.filmNames.length > 0 ? character.filmNames : ['N/A'])"
+          class="me-2 mb-2 badge" [ngStyle]="film === 'N/A' ? {
+           'color': '#CECECE50',
+           'background-color': '#232323',
+           'border': '1px solid #CECECE50'
+         } : {}">
+          {{ film }}
+        </p>
+      </div>
+
+      <div class="mb-2">
+        <h5>Naves:</h5>
+        <p *ngFor="let starship of (character.starshipNames && character.starshipNames.length > 0 ? character.starshipNames : ['N/A'])"
+          class="me-2 mb-2 badge" [ngStyle]="starship === 'N/A' ? {
+           'color': '#CECECE50',
+           'background-color': '#232323',
+           'border': '1px solid #CECECE50'
+         } : {}">
+          {{ starship }}
+        </p>
+      </div>
+
+      <div class="mb-2">
+        <h5>Veículos:</h5>
+        <p *ngFor="let vehicle of (character.vehicleNames && character.vehicleNames.length > 0 ? character.vehicleNames : ['N/A'])"
+          class="me-2 mb-2 badge" [ngStyle]="vehicle === 'N/A' ? {
+           'color': '#CECECE50',
+           'background-color': '#232323',
+           'border': '1px solid #CECECE50'
+         } : {}">
+          {{ vehicle }}
+        </p>
+      </div>
+
+      <div class="mb-2">
+        <h5>Espécie:</h5>
+        <p *ngFor="let specie of (character.speciesNames && character.speciesNames.length > 0 ? character.speciesNames : ['N/A'])"
+          class="me-2 mb-2 badge" [ngStyle]="specie === 'N/A' ? {
+           'color': '#CECECE50',
+           'background-color': '#232323',
+           'border': '1px solid #CECECE50'
+         } : {}">
+          {{ specie }}
+        </p>
+      </div>
+
+      <div class="mb-4">
+        <h5>Planeta:</h5>
+        <p *ngFor="let homeWorld of (character.homeWorldNames && character.homeWorldNames.length > 0 ? character.homeWorldNames : ['N/A'])"
+          class="me-2 mb-2 badge" [ngStyle]="homeWorld === 'N/A' ? {
+           'color': '#CECECE50',
+           'background-color': '#232323',
+           'border': '1px solid #CECECE50'
+         } : {}">
+          {{ homeWorld }}
+        </p>
+      </div>
+
+      <button class="btn btn-secondary w-100" (click)="resetCharacter()">
+        <strong>Pesquisar Novamente</strong>
+      </button>
+    </div>
+
+    <div *ngIf="!loading && !character">
+      <h5 class="mb-4">Agora, digite seu personagem favorito de Star Wars:</h5>
+      <input [(ngModel)]="characterName" placeholder="Nome do personagem" class="form-control"
+        [ngClass]="{'is-invalid': characterError}" />
+      <div *ngIf="characterError" class="error text-danger">Personagem inválido!</div>
+      <button class="btn btn-primary w-100 mt-4" [disabled]="!isCharacterValid()" (click)="fetchCharacter()">
+        <strong>Próximo</strong>
+      </button>
+    </div>
+  </div>
+</div>
